@@ -122,7 +122,7 @@ export default function ApplicationModal() {
                   id="previousDistributor"
                   label="Previous Distributor Used"
                   placeholder="e.g., DistroKid, TuneCore, CD Baby"
-                />67y6uy8oiiu987777777777777777777777u
+                />
               </>
             )}
             {/* ShadCN Select */}
