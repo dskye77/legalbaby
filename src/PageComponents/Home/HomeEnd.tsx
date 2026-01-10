@@ -1,8 +1,10 @@
+import Section from "@/components/ui/Section";
+
 import { Sparkles, ArrowRight } from "lucide-react";
 
 export default function HomeEnd() {
   return (
-    <section className="relative w-screen min-h-screen overflow-hidden">
+    <Section className="relative w-full min-h-screen overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-linear-to-t from-primary/10 via-background to-background"></div>
 
@@ -38,6 +40,6 @@ export default function HomeEnd() {
           </p>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

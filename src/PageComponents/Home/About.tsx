@@ -1,3 +1,5 @@
+import Section from "@/components/ui/Section";
+
 import { Globe, Users, Zap } from "lucide-react";
 
 const features = [
@@ -23,7 +25,7 @@ const features = [
 
 export default function About() {
   return (
-    <section id="about" className="px-20 py-16 relative bg-[#070707e0]">
+    <Section className="relative bg-[#070707e0]">
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         {/* Text Content */}
         <div>
@@ -53,7 +55,7 @@ export default function About() {
           {features.map(({ icon: Icon, title, description }) => (
             <div
               key={title}
-              className="group p-6 rounded-xl bg-[#121212] border border-[#262626] hover:border-primary/30 transition-all duration-300 hover-lift"
+              className="group p-6 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300 hover-lift"
             >
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-secondary group-hover:bg-primary/20 transition-colors duration-300">
@@ -72,6 +74,6 @@ export default function About() {
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

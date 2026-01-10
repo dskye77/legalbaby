@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -11,8 +12,8 @@ export default function Navbar() {
   const links = ["About", "Services", "Why Us", "Contact"];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md shadow-md transition-all duration-300">
-      <div className="max-w-6xl mx-auto px-4 md:px-8 flex items-center justify-between h-16 md:h-20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md shadow-md transition-all duration-300">
+      <div className="px-4 sm:px-6 md:px-20 lg:px-32 flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <span className="font-syne font-bold text-xl md:text-2xl text-foreground tracking-wide">

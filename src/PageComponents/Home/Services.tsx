@@ -1,4 +1,5 @@
 import { Building2, Radio, ListMusic, TrendingUp } from "lucide-react";
+import Section from "@/components/ui/Section";
 
 const services = [
   {
@@ -33,7 +34,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="section-padding relative px-16 py-20">
+    <Section className="relative">
       <div className="absolute inset-0 bg-linear-to-b from-transparent via-primary/5 to-transparent pointer-events-none"></div>
       <div className="container-tight relative">
         {/* Heading */}
@@ -45,8 +46,9 @@ export default function Services() {
             Everything You Need to <span className="text-primary">Win</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            From distribution to promotion, we&apos;ve built a complete ecosystem to
-            help independent artists thrive in the modern music industry.
+            From distribution to promotion, we&apos;ve built a complete
+            ecosystem to help independent artists thrive in the modern music
+            industry.
           </p>
         </div>
 
@@ -55,27 +57,36 @@ export default function Services() {
           {services.map(({ icon: Icon, title, description, badge }) => (
             <div
               key={title}
-              className="group relative p-8 rounded-2xl bg-background border border-[#262626] hover:border-primary/40 transition-all duration-300 hover-lift overflow-hidden"
+              className="
+              group relative p-8 rounded-2xl
+              bg-background border border-border
+              transition-all duration-300
+              hover:border-primary/40
+              hover:shadow-[0_0_40px_0_var(--primary-glow)]
+              overflow-hidden
+            "
             >
               <div className="absolute inset-0 bg-gradient-radial from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-6">
-                  <div className="p-3 rounded-xl bg-secondary group-hover:bg-primary/20 transition-colors duration-300">
+                  <div className="p-3 rounded-xl bg-primary/20 transition-colors duration-300">
                     <Icon size={24} className="text-primary" />
                   </div>
-                  <span className="text-xs font-medium text-primary bg-secondary px-3 py-1 rounded-full">
+                  <span className="text-xs font-medium text-primary bg-primary/20 px-3 py-1 rounded-full">
                     {badge}
                   </span>
                 </div>
                 <h3 className="font-display font-bold text-xl text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
                   {title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">{description}</p>
+                <p className="text-muted-foreground leading-relaxed">
+                  {description}
+                </p>
               </div>
             </div>
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

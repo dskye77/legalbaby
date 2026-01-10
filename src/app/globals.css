@@ -1,12 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Syne:wght@400..800&display=swap");
 @import "tailwindcss";
 
-
 :root {
-  --background: #171717;
+  --background: #0a0a0a;
   --foreground: #ffffff;
   --muted-foreground: #999999;
+
+  --muted: #141414;
+
   --primary: #ff6600;
+  --primary-glow: #ff660065;
+
+  --border: #262626;
+  --card: #121212;
+  --destructive: #ef4444;
 
   --font-inter: "Inter", sans-serif;
   --font-syne: "Syne", sans-serif;
@@ -16,7 +23,13 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
   --color-primary: var(--primary);
+  --color-primary-glow: var(--primary-glow);
+
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-destructive: var(--destructive);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -35,4 +48,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+button{
+  cursor: pointer;
 }

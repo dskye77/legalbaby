@@ -1,4 +1,5 @@
 import { Eye, Rocket, Shield, Heart } from "lucide-react";
+import Section from "@/components/ui/Section";
 
 const reasons = [
   {
@@ -29,7 +30,7 @@ const reasons = [
 
 export default function Why() {
   return (
-    <section id="why" className="section-padding relative px-16 py-20 bg-[#070707e0]">
+    <Section className="relative bg-[#070707e0]">
       <div className="container-tight">
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-8 items-center">
           {/* Heading */}
@@ -41,8 +42,9 @@ export default function Why() {
               Built Different. <span className="text-primary">For Real.</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              We&apos;re not here to play the same game. LEGAL BABY is redesigning what
-              artist services should look like in 2024 and beyond.
+              We&apos;re not here to play the same game. LEGAL BABY is
+              redesigning what artist services should look like in 2024 and
+              beyond.
             </p>
           </div>
 
@@ -67,6 +69,6 @@ export default function Why() {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
