@@ -12,6 +12,7 @@
   --primary-glow: #ff660065;
 
   --border: #262626;
+  --input: #262626;
   --card: #121212;
   --destructive: #ef4444;
 
@@ -28,6 +29,7 @@
   --color-primary-glow: var(--primary-glow);
 
   --color-border: var(--border);
+  --color-input: var(--input);
   --color-card: var(--card);
   --color-destructive: var(--destructive);
 

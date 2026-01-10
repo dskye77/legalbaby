@@ -1,6 +1,8 @@
 import { Mail, Instagram, Twitter, Youtube } from "lucide-react";
 import Link from "next/link";
 
+import { useAppStore } from "@/stores/store";
+
 const quickLinks = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
@@ -20,6 +22,14 @@ const legalLinks = [
 ];
 
 export default function Footer() {
+  const setApplicationMenuOpen = useAppStore(
+    (state) => state.setApplicationMenuOpen
+  );
+
+  const openApplicationMenu = () => {
+    setApplicationMenuOpen(true);
+  };
+
   return (
     <footer className="relative border-t border-border bg-card/30 px-4 md:px-20 py-16 pb-4">
       <div className="container-tight px-4 md:px-8 py-12 md:py-16">
@@ -38,7 +48,10 @@ export default function Footer() {
               and artist services. Own your art. Control your future.
             </p>
 
-            <button className="inline-flex items-center justify-center gap-2 rounded-lg text-sm font-display font-semibold bg-primary text-primary-foreground h-10 px-4 py-2 transition-all duration-300 hover:bg-primary/90 shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-1">
+            <button
+              className="inline-flex items-center justify-center gap-2 rounded-lg text-sm font-display font-semibold bg-primary text-primary-foreground h-10 px-4 py-2 transition-all duration-300 hover:bg-primary/90 shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-1"
+              onClick={openApplicationMenu}
+            >
               Request Access
             </button>
           </div>

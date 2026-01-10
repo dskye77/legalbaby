@@ -1,11 +1,15 @@
 import Hero from "./Hero";
-import Offer from "./Offer";
+import Process from "./process";
+import Eligibility from "./Eligibility";
+import CheckEligibility from "./CheckEligibility";
 
 export default function PlaylistsPage() {
   return (
     <div>
       <Hero />
-      <Offer />
+      <Process />
+      <Eligibility />
+      <CheckEligibility />
     </div>
   );
 }

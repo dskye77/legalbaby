@@ -27,7 +27,7 @@ const processSteps: StepItem[] = [
   },
 ];
 
-export default function ProcessPage() {
+export default function Process() {
   return (
     <Steps
       title="How Playlist Pitching Works"

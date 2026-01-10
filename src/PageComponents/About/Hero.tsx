@@ -1,6 +1,6 @@
 import PagesHero from "@/components/pages/PagesHero";
 
-export default function WhoWeAre() {
+export default function Hero() {
   return (
     <PagesHero
       eyebrow="Who We Are"

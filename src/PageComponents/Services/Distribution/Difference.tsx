@@ -8,6 +8,7 @@ import {
   CircleCheck,
   TrendingUp,
 } from "lucide-react";
+import { useAppStore } from "@/stores/store";
 
 const differences = [
   {
@@ -49,6 +50,14 @@ const features = [
 ];
 
 export default function Difference() {
+  const setApplicationMenuOpen = useAppStore(
+    (state) => state.setApplicationMenuOpen
+  );
+
+  const openApplicationMenu = () => {
+    setApplicationMenuOpen(true);
+  };
+
   return (
     <Section>
       {/* Header */}
@@ -130,7 +139,10 @@ export default function Difference() {
 
       {/* CTA */}
       <div className="text-center mt-12">
-        <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-display tracking-wide transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground font-semibold hover:bg-primary/90 shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-1 h-12 px-8 text-base">
+        <button
+          className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-display tracking-wide transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground font-semibold hover:bg-primary/90 shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-1 h-12 px-8 text-base"
+          onClick={openApplicationMenu}
+        >
           Start Distributing
         </button>
       </div>
