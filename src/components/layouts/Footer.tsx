@@ -66,7 +66,7 @@ export default function Footer() {
               <a
                 href="#"
                 className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200"
-                aria-label="Instagram"
+                aria-label="Instagram "
                 tabIndex={0}
               >
                 <Instagram size={20} />
