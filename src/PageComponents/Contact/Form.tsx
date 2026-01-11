@@ -37,7 +37,7 @@ export default function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   // Replace with your Formspree form ID for contact form
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_CONTACT_FORM_ID";
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mdaanrrq";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
