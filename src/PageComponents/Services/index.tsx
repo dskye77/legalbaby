@@ -1,3 +1,4 @@
+"use client";
 import Hero from "./Hero";
 import Services from "./Services";
 import Difference from "./Difference";
