@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 
+import { motion } from "framer-motion";
+
 import { X, Sparkles } from "lucide-react";
 import { useAppStore } from "@/stores/store";
 import FormField from "@/components/ui/FormField";
@@ -27,12 +29,23 @@ export default function ApplicationModal() {
   const [releasedMusic, setReleasedMusic] = useState(false);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 ">
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.5 }}
+    >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-md" />
+      <div
+        className="absolute inset-0 bg-background/80 backdrop-blur-md"
+        onClick={closeModal}
+      />
 
       {/* Modal container */}
-      <div className="relative w-full max-w-lg max-h-[90vh] rounded-2xl bg-card border border-border shadow-2xl shadow-primary/10 overflow-y-auto overflow-x-hidden">
+      <div
+        className="relative w-full max-w-lg max-h-[90vh] rounded-2xl bg-card border border-border shadow-2xl shadow-primary/10 overflow-y-auto overflow-x-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Glow border */}
         <div className="absolute -inset-0.5 bg-linear-to-r from-primary/20 via-transparent to-primary/20 rounded-2xl blur-xl opacity-50" />
 
@@ -166,6 +179,6 @@ export default function ApplicationModal() {
           </form>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

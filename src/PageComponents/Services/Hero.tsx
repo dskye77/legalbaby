@@ -5,8 +5,7 @@ export default function Hero() {
     <PagesHero
       eyebrow="What We Offer"
       title="Comprehensive Artist Services"
-      description="Everything you need to distribute, promote, and grow your music
-            career—without the industry BS."
+      description="Everything you need to distribute, promote, and grow your musiccareer—without the industry BS."
     />
   );
 }

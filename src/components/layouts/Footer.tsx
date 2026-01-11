@@ -32,8 +32,8 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-border bg-card/30 px-4 md:px-20 py-16 pb-4">
-      <div className="container-tight px-4 md:px-8 py-12 md:py-16">
+    <footer className="relative border-t border-border bg-card/30 px-4 md:px-20 pb-4">
+      <div className="px-4 md:px-8 py-12 md:py-16">
         {/* Top Grid */}
         <div className="grid md:grid-cols-3 gap-12 md:gap-8">
           {/* Brand */}
