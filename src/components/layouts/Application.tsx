@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
-
 import { motion } from "framer-motion";
-
-import { X, Sparkles } from "lucide-react";
+import { X, Sparkles, Loader2 } from "lucide-react";
 import { useAppStore } from "@/stores/store";
 import FormField from "@/components/ui/FormField";
 import {
@@ -12,9 +10,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"; // ShadCN select
+} from "@/components/ui/select";
 import Badge from "../ui/Badge";
-
 import { Switch } from "../ui/switch";
 
 export default function ApplicationModal() {
@@ -25,8 +22,50 @@ export default function ApplicationModal() {
   const closeModal = () => setApplicationMenuOpen(false);
 
   const [platform, setPlatform] = useState("");
-
   const [releasedMusic, setReleasedMusic] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  // Replace with your Formspree form ID
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjggbqqq";
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    const formData = new FormData(e.currentTarget);
+    
+    // Add the platform and releasedMusic values to formData
+    formData.append("platform", platform);
+    formData.append("hasReleasedMusic", releasedMusic.toString());
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        // Reset form after 2 seconds and close modal
+        setTimeout(() => {
+          closeModal();
+          setSubmitStatus("idle");
+        }, 2000);
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <motion.div
@@ -50,7 +89,7 @@ export default function ApplicationModal() {
         <div className="absolute -inset-0.5 bg-linear-to-r from-primary/20 via-transparent to-primary/20 rounded-2xl blur-xl opacity-50" />
 
         {/* Content */}
-        <div className="relative bg-card rounded-2xl p-6 md:p-8 ">
+        <div className="relative bg-card rounded-2xl p-6 md:p-8">
           {/* Close button */}
           <button
             onClick={closeModal}
@@ -79,29 +118,53 @@ export default function ApplicationModal() {
             </p>
           </div>
 
+          {/* Success Message */}
+          {submitStatus === "success" && (
+            <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/30 text-center">
+              <p className="text-primary font-medium">
+                Application submitted successfully! We&apos;ll be in touch soon.
+              </p>
+            </div>
+          )}
+
+          {/* Error Message */}
+          {submitStatus === "error" && (
+            <div className="mb-6 p-4 rounded-lg bg-destructive/10 border border-destructive/30 text-center">
+              <p className="text-destructive font-medium">
+                Something went wrong. Please try again.
+              </p>
+            </div>
+          )}
+
           {/* Form */}
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={handleSubmit}>
             <FormField
               id="fullName"
+              name="fullName"
               label="Full Name"
               placeholder="Your full name"
               required
+              disabled={isSubmitting}
             />
 
             <FormField
               id="email"
+              name="email"
               label="Email Address"
               type="email"
               placeholder="you@example.com"
               required
+              disabled={isSubmitting}
             />
 
             <FormField
               id="whatsapp"
+              name="whatsapp"
               label="WhatsApp Phone Number"
               type="tel"
               placeholder="+1 234 567 8900"
               hint="(optional)"
+              disabled={isSubmitting}
             />
 
             {/* Released music toggle */}
@@ -117,34 +180,48 @@ export default function ApplicationModal() {
                 id="hasReleased"
                 checked={releasedMusic}
                 onCheckedChange={setReleasedMusic}
+                disabled={isSubmitting}
               />
             </div>
+
             {releasedMusic && (
               <>
                 <FormField
                   id="artistName"
+                  name="artistName"
                   label="Artist Name"
                   placeholder="Your artist/stage name"
+                  disabled={isSubmitting}
                 />
                 <FormField
                   id="profileLink"
+                  name="profileLink"
                   label="Spotify Artist Profile Link"
                   placeholder="https://open.spotify.com/artist/..."
+                  disabled={isSubmitting}
                 />
                 <FormField
                   id="previousDistributor"
+                  name="previousDistributor"
                   label="Previous Distributor Used"
                   placeholder="e.g., DistroKid, TuneCore, CD Baby"
+                  disabled={isSubmitting}
                 />
               </>
             )}
-            {/* ShadCN Select */}
+
+            {/* Social Media Platform */}
             <div className="space-y-2">
               <label className="text-sm font-medium">
                 Social Media Presence <span className="text-primary">*</span>
               </label>
 
-              <Select value={platform} onValueChange={setPlatform}>
+              <Select 
+                value={platform} 
+                onValueChange={setPlatform}
+                disabled={isSubmitting}
+                required
+              >
                 <SelectTrigger className="w-full rounded-md border border-border bg-muted px-3 py-2 text-sm">
                   <SelectValue placeholder="Select platform" />
                 </SelectTrigger>
@@ -172,9 +249,17 @@ export default function ApplicationModal() {
             {/* Submit button */}
             <button
               type="submit"
-              className="h-12 w-full rounded-lg bg-primary text-primary-foreground font-semibold shadow-lg shadow-primary/30 hover:bg-primary/90 transition"
+              disabled={isSubmitting || !platform}
+              className="h-12 w-full rounded-lg bg-primary text-primary-foreground font-semibold shadow-lg shadow-primary/30 hover:bg-primary/90 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Submit Application
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                "Submit Application"
+              )}
             </button>
           </form>
         </div>

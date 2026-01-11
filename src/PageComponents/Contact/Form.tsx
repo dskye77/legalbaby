@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Section from "@/components/ui/Section";
-import { Mail, Clock, MessageSquare, Send } from "lucide-react";
+import { Mail, Clock, MessageSquare, Send, Loader2 } from "lucide-react";
 
 type ContactMethod = {
   title: string;
@@ -32,6 +33,48 @@ const contactMethods: ContactMethod[] = [
 ];
 
 export default function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  // Replace with your Formspree form ID for contact form
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mdaanrrq";
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    // Store form reference before async operation
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        // Reset form after showing success message
+        form.reset();
+        setTimeout(() => {
+          setSubmitStatus("idle");
+        }, 5000);
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <Section>
       <div className="grid lg:grid-cols-2 gap-16">
@@ -40,7 +83,26 @@ export default function ContactForm() {
           <h2 className="font-display text-2xl font-bold text-foreground mb-6">
             Send Us a Message
           </h2>
-          <form className="space-y-6">
+
+          {/* Success Message */}
+          {submitStatus === "success" && (
+            <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/30">
+              <p className="text-primary font-medium">
+                Message sent successfully! We&apos;ll get back to you soon.
+              </p>
+            </div>
+          )}
+
+          {/* Error Message */}
+          {submitStatus === "error" && (
+            <div className="mb-6 p-4 rounded-lg bg-destructive/10 border border-destructive/30">
+              <p className="text-destructive font-medium">
+                Something went wrong. Please try again.
+              </p>
+            </div>
+          )}
+
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 gap-4">
               {["Name", "Email"].map((field) => (
                 <div key={field}>
@@ -49,8 +111,11 @@ export default function ContactForm() {
                   </label>
                   <input
                     type={field === "Email" ? "email" : "text"}
+                    name={field.toLowerCase()}
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                     placeholder={`Your ${field.toLowerCase()}`}
+                    required
+                    disabled={isSubmitting}
                   />
                 </div>
               ))}
@@ -60,8 +125,11 @@ export default function ContactForm() {
                 Subject
               </label>
               <input
+                name="subject"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                 placeholder="What's this about?"
+                required
+                disabled={isSubmitting}
               />
             </div>
             <div>
@@ -69,17 +137,30 @@ export default function ContactForm() {
                 Message
               </label>
               <textarea
+                name="message"
                 className="flex min-h-20 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Your message..."
                 rows={6}
+                required
+                disabled={isSubmitting}
               ></textarea>
             </div>
             <button
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-display tracking-wide transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground font-semibold hover:bg-primary/90 shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-1 h-12 px-8 text-base"
               type="submit"
+              disabled={isSubmitting}
             >
-              Send Message
-              <Send className="w-4 h-4 ml-2" />
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  Send Message
+                  <Send className="w-4 h-4 ml-2" />
+                </>
+              )}
             </button>
           </form>
         </div>
