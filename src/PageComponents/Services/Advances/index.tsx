@@ -1,3 +1,4 @@
+"use client";
 import Hero from "./Hero";
 import Process from "./process";
 import Eligibility from "./Eligibility";

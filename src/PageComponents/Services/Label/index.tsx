@@ -1,3 +1,4 @@
+"use client";
 import Hero from "./Hero";
 import Offer from "./Offer";
 import Approach from "./Approach";

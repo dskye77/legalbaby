@@ -1,3 +1,4 @@
+"use client";
 import Hero from "./Hero";
 import Strategy from "./Strategy";
 import Approach from "./Approach";
