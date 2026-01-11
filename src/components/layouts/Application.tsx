@@ -27,14 +27,30 @@ export default function ApplicationModal() {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   // Replace with your Formspree form ID
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjggbqqq";
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    e.stopPropagation();
+
+    // Client-side validation
+    if (!platform) {
+      setSubmitStatus("error");
+      return;
+    }
+
+    const form = e.currentTarget;
+    
+    // Check form validity
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     
     // Add the platform and releasedMusic values to formData
     formData.append("platform", platform);
@@ -51,12 +67,18 @@ export default function ApplicationModal() {
 
       if (response.ok) {
         setSubmitStatus("success");
-        // Reset form after 2 seconds and close modal
+        form.reset();
+        setPlatform("");
+        setReleasedMusic(false);
+        
+        // Close modal after 2 seconds
         setTimeout(() => {
           closeModal();
           setSubmitStatus("idle");
         }, 2000);
       } else {
+        const data = await response.json();
+        console.error("Formspree error:", data);
         setSubmitStatus("error");
       }
     } catch (error) {
@@ -216,11 +238,18 @@ export default function ApplicationModal() {
                 Social Media Presence <span className="text-primary">*</span>
               </label>
 
+              {/* Hidden input for form validation */}
+              <input
+                type="hidden"
+                name="socialPlatform"
+                value={platform}
+                required
+              />
+
               <Select 
                 value={platform} 
                 onValueChange={setPlatform}
                 disabled={isSubmitting}
-                required
               >
                 <SelectTrigger className="w-full rounded-md border border-border bg-muted px-3 py-2 text-sm">
                   <SelectValue placeholder="Select platform" />
@@ -244,6 +273,12 @@ export default function ApplicationModal() {
                   )}
                 </SelectContent>
               </Select>
+              
+              {submitStatus === "error" && !platform && (
+                <p className="text-xs text-destructive mt-1">
+                  Please select a social media platform
+                </p>
+              )}
             </div>
 
             {/* Submit button */}

@@ -37,15 +37,23 @@ export default function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   // Replace with your Formspree form ID for contact form
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mdaanrrq";
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_CONTACT_FORM_ID";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    e.stopPropagation();
+
+    const form = e.currentTarget;
+    
+    // Check form validity
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
-    // Store form reference before async operation
-    const form = e.currentTarget;
     const formData = new FormData(form);
 
     try {
@@ -65,6 +73,8 @@ export default function ContactForm() {
           setSubmitStatus("idle");
         }, 5000);
       } else {
+        const data = await response.json();
+        console.error("Formspree error:", data);
         setSubmitStatus("error");
       }
     } catch (error) {
