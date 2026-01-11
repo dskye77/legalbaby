@@ -57,14 +57,14 @@ export default function Services() {
           {services.map(({ icon: Icon, title, description, badge }) => (
             <div
               key={title}
-              className="
+              className={`
               group relative p-8 rounded-2xl
               bg-background border border-border
               transition-all duration-300
               hover:border-primary/40
               hover:shadow-[0_0_40px_0_var(--primary-glow)]
               overflow-hidden
-            "
+            `}
             >
               <div className="absolute inset-0 bg-gradient-radial from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative z-10">
