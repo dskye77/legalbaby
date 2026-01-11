@@ -21,6 +21,16 @@ export const metadata: Metadata = {
   title: "LEGAL BABY | Music Distribution & Artist Services Platform",
   description: "Empowering independent artists with next-generation distribution and artist services. Own your art. Control your future.",
   metadataBase: new URL("https://legalbabydistribution.com"),
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/icon.png', type: 'image/png', sizes: '192x192' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+  },
   keywords: [
     "music distribution",
     "independent artists",
@@ -61,7 +71,7 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-video-preview": -1,
-      "max-image-preview": "large", // FIXED: This must be a literal type "large" | "none" | "standard"
+      "max-image-preview": "large",
       "max-snippet": -1,
     },
   },
