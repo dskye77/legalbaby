@@ -13,8 +13,8 @@ type ContactMethod = {
 const contactMethods: ContactMethod[] = [
   {
     title: "Email",
-    description: "hello@legalbaby.com",
-    href: "mailto:hello@legalbaby.com",
+    description: "support@legalbabydistribution.com",
+    href: "mailto:support@legalbabydistribution.com",
     Icon: Mail,
   },
   {
