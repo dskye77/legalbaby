@@ -1,19 +1,21 @@
-// src/app/services/label/page.tsx
-import { Metadata } from "next";
-import LabelPage from "@/PageComponents/Services/Label";
 
-export const metadata: Metadata = {
-  title: "Label Services | Full Artist Development Without the Contract",
-  description: "Comprehensive artist development, branding, strategy, and career guidance. All the benefits of a label without giving up your rights.",
-  keywords: ["label services", "artist development", "music career", "artist branding", "music strategy"],
-  openGraph: {
-    title: "Label Services | LEGAL BABY",
-    description: "Professional support that respects your independence",
-    url: "/services/label",
-  },
-  alternates: {
-    canonical: "/services/label",
-  },
-};
+// src/app/services/label/page.tsx
+import LabelPage from "@/PageComponents/Services/Label";
+import { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "Label Services - Full Artist Development Support",
+  description: "Comprehensive label services for serious independent artists. Artist branding, release strategy, career development, and one-on-one support without giving up your rights.",
+  path: "/services/label",
+  keywords: [
+    "music label services",
+    "artist development",
+    "music branding",
+    "independent label",
+    "artist management",
+    "music career development",
+  ],
+});
 
 export default LabelPage;

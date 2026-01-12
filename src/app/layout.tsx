@@ -1,11 +1,10 @@
+// src/app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-
 import "./globals.css";
-
 import Layout from "@/PageComponents/Layout/Layout";
-
 import { ThemeProvider } from "@/components/theme-provider";
+import { defaultMetadata } from "@/lib/metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,71 +16,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "LEGAL BABY | Music Distribution & Artist Services Platform",
-  description: "Empowering independent artists with next-generation distribution and artist services. Own your art. Control your future.",
-  metadataBase: new URL("https://legalbabydistribution.com"),
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: '32x32' },
-      { url: '/icon.png', type: 'image/png', sizes: '192x192' },
-    ],
-    apple: [
-      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-    shortcut: '/favicon.ico',
-  },
-  keywords: [
-    "music distribution",
-    "independent artists",
-    "artist services",
-    "music promotion",
-    "playlist pitching",
-    "label services",
-    "music streaming",
-  ],
-  authors: [{ name: "LEGAL BABY", url: "https://legalbabydistribution.com" }],
-  creator: "LEGAL BABY",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://legalbabydistribution.com",
-    siteName: "LEGAL BABY",
-    title: "LEGAL BABY | Music Distribution & Artist Services Platform",
-    description: "Empowering independent artists with next-generation distribution and artist services.",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "LEGAL BABY - Music Distribution Platform",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "LEGAL BABY | Music Distribution & Artist Services Platform",
-    description: "Empowering independent artists with next-generation distribution and artist services.",
-    images: ["/twitter-image.jpg"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  alternates: {
-    canonical: "https://legalbabydistribution.com",
-  },
-  verification: {
-    google: "your-google-verification-code",
-  },
-};
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
   children,
@@ -89,22 +24,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <html lang="en" suppressHydrationWarning>
-        <head />
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Favicons */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+        
+        {/* Additional meta tags */}
+        <meta name="theme-color" content="#ff6600" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Layout>{children}</Layout>
-          </ThemeProvider>
-        </body>
-      </html>
-    </>
+          <Layout>{children}</Layout>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

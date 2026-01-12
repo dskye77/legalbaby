@@ -1,19 +1,20 @@
 // src/app/services/playlists/page.tsx
-import { Metadata } from "next";
 import PlaylistsPage from "@/PageComponents/Services/Playlists";
+import { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Playlist Pitching | Get Featured on Spotify & Apple Music",
-  description: "Professional playlist pitching to editorial and independent curators. Real relationships, honest expectations, genuine results.",
-  keywords: ["playlist pitching", "spotify playlists", "music curation", "editorial playlists", "independent playlists"],
-  openGraph: {
-    title: "Playlist Pitching Services | LEGAL BABY",
-    description: "Connect your music with the right curators",
-    url: "/services/playlists",
-  },
-  alternates: {
-    canonical: "/services/playlists",
-  },
-};
+export const metadata: Metadata = createMetadata({
+  title: "Playlist Pitching - Get Your Music on Spotify & Apple Playlists",
+  description: "Professional playlist pitching to editorial and independent curators. Real relationships, honest expectations, genuine results. Increase streams and reach new listeners.",
+  path: "/services/playlists",
+  keywords: [
+    "playlist pitching",
+    "spotify playlist submission",
+    "music playlist promotion",
+    "get on playlists",
+    "editorial playlist pitching",
+    "independent playlist curators",
+  ],
+});
 
 export default PlaylistsPage;

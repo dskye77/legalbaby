@@ -1,36 +1,27 @@
 // src/app/services/page.tsx
-import { Metadata } from "next";
 import ServicesPage from "@/PageComponents/Services";
-import { generateServiceSchema } from "@/lib/seo";
-import Script from "next/script";
+import { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Artist Services | Distribution, Promotion & More",
-  description: "Complete music distribution, playlist pitching, promotion, label services, and artist advances. Professional tools for independent musicians without upfront costs.",
-  keywords: ["music distribution", "playlist pitching", "music promotion", "artist services", "label services", "artist advances"],
-  openGraph: {
-    title: "Comprehensive Artist Services | LEGAL BABY",
-    description: "Everything you need to succeed as an independent artist",
-    url: "/services",
-  },
-  alternates: {
-    canonical: "/services",
-  },
-};
+export const metadata: Metadata = createMetadata({
+  title: "Artist Services - Music Distribution, Promotion & Marketing",
+  description: "Comprehensive music services for independent artists. Distribution to 200+ platforms, professional playlist pitching, marketing support, label services, and catalog-backed advances.",
+  path: "/services",
+  keywords: [
+    "music artist services",
+    "music distribution services",
+    "music promotion services",
+    "playlist pitching service",
+    "music label services",
+    "artist development",
+  ],
+});
 
-export default function Services() {
-  const serviceSchema = generateServiceSchema();
-  
-  return (
-    <>
-      <Script
-        id="service-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema),
-        }}
-      />
-      <ServicesPage />
-    </>
-  );
-}
+export default ServicesPage;
+
+
+
+
+
+
+

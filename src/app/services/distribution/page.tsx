@@ -1,19 +1,20 @@
 // src/app/services/distribution/page.tsx
-import { Metadata } from "next";
 import DistributionPage from "@/PageComponents/Services/Distribution";
+import { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Music Distribution | Get Your Music on 200+ Platforms",
-  description: "Distribute music to Spotify, Apple Music, Amazon & 200+ platforms. 70% royalty share, no upfront costs, keep your rights. Fast delivery in 24-72 hours.",
-  keywords: ["spotify distribution", "apple music distribution", "music streaming", "digital distribution", "independent artist distribution"],
-  openGraph: {
-    title: "Global Music Distribution | LEGAL BABY",
-    description: "Reach listeners worldwide on every major streaming platform",
-    url: "/services/distribution",
-  },
-  alternates: {
-    canonical: "/services/distribution",
-  },
-};
+export const metadata: Metadata = createMetadata({
+  title: "Music Distribution - 200+ Platforms Worldwide",
+  description: "Distribute your music to Spotify, Apple Music, Amazon Music, and 200+ platforms. Earn 70% royalties, no upfront costs, keep your rights. Fast delivery within 24-72 hours.",
+  path: "/services/distribution",
+  keywords: [
+    "music distribution",
+    "spotify distribution",
+    "apple music distribution",
+    "digital music distribution",
+    "independent music distribution",
+    "music streaming distribution",
+  ],
+});
 
 export default DistributionPage;
