@@ -14,7 +14,7 @@ export default function Philosophy() {
           <p className="text-muted-foreground text-lg leading-relaxed mb-6">
             The music industry has become obsessed with metrics, algorithms, and
             quarterly reports. Somewhere along the way, the art got lost.
-            We&apos;sre here to bring it back.
+            We&apos;re here to bring it back.
           </p>
           <p className="text-muted-foreground leading-relaxed mb-6">
             At LEGAL BABY, we believe that great music deserves to be

@@ -36,7 +36,7 @@ export default function Story() {
           </p>
           <p className="text-lg leading-relaxed text-foreground">
             LEGAL BABY is the platform we wished existed when we started. Now
-            we&apos;sre building it for the next generation of independent
+            we&apos;re building it for the next generation of independent
             artists.
           </p>
         </div>

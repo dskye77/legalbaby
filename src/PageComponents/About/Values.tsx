@@ -59,7 +59,7 @@ export default function Values() {
             Our Core Values
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            These aren&apos;st just words on a page. They&apos;sre the
+            These aren&apos;st just words on a page. They&apos;re the
             principles that guide every decision we make.
           </p>
         </div>
