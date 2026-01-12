@@ -24,7 +24,9 @@ export default function ApplicationModal() {
   const [platform, setPlatform] = useState("");
   const [releasedMusic, setReleasedMusic] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
   // Replace with your Formspree form ID
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjggbqqq";
@@ -40,7 +42,7 @@ export default function ApplicationModal() {
     }
 
     const form = e.currentTarget;
-    
+
     // Check form validity
     if (!form.checkValidity()) {
       form.reportValidity();
@@ -51,7 +53,7 @@ export default function ApplicationModal() {
     setSubmitStatus("idle");
 
     const formData = new FormData(form);
-    
+
     // Add the platform and releasedMusic values to formData
     formData.append("platform", platform);
     formData.append("hasReleasedMusic", releasedMusic.toString());
@@ -70,7 +72,7 @@ export default function ApplicationModal() {
         form.reset();
         setPlatform("");
         setReleasedMusic(false);
-        
+
         // Close modal after 2 seconds
         setTimeout(() => {
           closeModal();
@@ -246,8 +248,8 @@ export default function ApplicationModal() {
                 required
               />
 
-              <Select 
-                value={platform} 
+              <Select
+                value={platform}
                 onValueChange={setPlatform}
                 disabled={isSubmitting}
               >
@@ -260,7 +262,7 @@ export default function ApplicationModal() {
                   position="popper"
                   sideOffset={4}
                 >
-                  {["instagram", "tiktok", "twitter", "facebook"].map(
+                  {["instagram", "tiktok", "X (Twitter)", "facebook"].map(
                     (platform) => (
                       <SelectItem
                         key={platform}
@@ -273,13 +275,25 @@ export default function ApplicationModal() {
                   )}
                 </SelectContent>
               </Select>
-              
+
               {submitStatus === "error" && !platform && (
                 <p className="text-xs text-destructive mt-1">
                   Please select a social media platform
                 </p>
               )}
             </div>
+            {platform && (
+              <FormField
+                id="platformHandle"
+                name="platformHandle"
+                label={`${
+                  platform.charAt(0).toUpperCase() + platform.slice(1)
+                } profile link`}
+                placeholder={`Your ${platform} profile link`}
+                required
+                disabled={isSubmitting}
+              />
+            )}
 
             {/* Submit button */}
             <button
