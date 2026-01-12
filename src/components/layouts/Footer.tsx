@@ -83,11 +83,11 @@ export default function Footer() {
             </h3>
 
             <a
-              href="mailto:hello@legalbaby.com"
+              href="mailto:support@legalbabydistribution.com"
               className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-200 text-sm mb-6"
             >
               <Mail size={16} />
-              hello@legalbaby.com
+              support@legalbabydistribution.com
             </a>
 
             <div className="flex items-center gap-4">

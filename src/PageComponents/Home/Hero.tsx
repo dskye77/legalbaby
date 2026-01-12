@@ -1,9 +1,17 @@
+import { useAppStore } from "@/stores/store";
+
 import { ArrowRight, Music, Sparkles } from "lucide-react";
+
 
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 
 export default function Hero() {
+  const setMenuOpen = useAppStore((state) => state.setApplicationMenuOpen);
+
+  const openMenu = () => {
+    setMenuOpen(true);
+  };
   return (
     <section
       className="w-full relative z-10 px-4 md:px-20 py-24"
@@ -30,7 +38,7 @@ export default function Hero() {
           just your music reaching the world.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="primary">
+          <Button variant="primary" onClick={openMenu}>
             Request Access
             <ArrowRight size={20} />
           </Button>
