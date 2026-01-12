@@ -1,5 +1,5 @@
 "use client";
-import { Mail, Instagram, Twitter, Youtube } from "lucide-react";
+import { Mail, Instagram, Twitter, Facebook } from "lucide-react";
 import Link from "next/link";
 
 import { useAppStore } from "@/stores/store";
@@ -12,9 +12,9 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-  { label: "Instagram", href: "#", icon: Instagram },
-  { label: "Twitter", href: "#", icon: Twitter },
-  { label: "YouTube", href: "#", icon: Youtube },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61586064308484", icon: Facebook },
+  { label: "Instagram", href: "https://www.instagram.com/legalbabymusic_?igsh=MTZjZGFzaHc1ejRrNA==", icon: Instagram },
+  { label: "Twitter", href: "https://x.com/legalbabymusic_", icon: Twitter },
 ];
 
 const legalLinks = [
@@ -97,6 +97,8 @@ export default function Footer() {
                   href={href}
                   aria-label={label}
                   className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Icon size={20} />
                 </a>
