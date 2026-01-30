@@ -13,10 +13,11 @@ import {
 } from "@/components/ui/select";
 import Badge from "../ui/Badge";
 import { Switch } from "../ui/switch";
+import { trackApplicationSubmit, trackFormInteraction } from "@/lib/googleAds";
 
 export default function ApplicationModal() {
   const setApplicationMenuOpen = useAppStore(
-    (state) => state.setApplicationMenuOpen
+    (state) => state.setApplicationMenuOpen,
   );
 
   const closeModal = () => setApplicationMenuOpen(false);
@@ -69,6 +70,10 @@ export default function ApplicationModal() {
 
       if (response.ok) {
         setSubmitStatus("success");
+
+        // Track the successful application submission
+        trackApplicationSubmit();
+
         form.reset();
         setPlatform("");
         setReleasedMusic(false);
@@ -169,6 +174,7 @@ export default function ApplicationModal() {
               placeholder="Your full name"
               required
               disabled={isSubmitting}
+              onFocus={() => trackFormInteraction("Full Name")}
             />
 
             <FormField
@@ -179,6 +185,7 @@ export default function ApplicationModal() {
               placeholder="you@example.com"
               required
               disabled={isSubmitting}
+              onFocus={() => trackFormInteraction("Email")}
             />
 
             <FormField
@@ -189,6 +196,7 @@ export default function ApplicationModal() {
               placeholder="+1 234 567 8900"
               hint="(optional)"
               disabled={isSubmitting}
+              onFocus={() => trackFormInteraction("WhatsApp")}
             />
 
             {/* Released music toggle */}
@@ -203,7 +211,10 @@ export default function ApplicationModal() {
               <Switch
                 id="hasReleased"
                 checked={releasedMusic}
-                onCheckedChange={setReleasedMusic}
+                onCheckedChange={(checked) => {
+                  setReleasedMusic(checked);
+                  trackFormInteraction("Released Music Toggle");
+                }}
                 disabled={isSubmitting}
               />
             </div>
@@ -216,6 +227,7 @@ export default function ApplicationModal() {
                   label="Artist Name"
                   placeholder="Your artist/stage name"
                   disabled={isSubmitting}
+                  onFocus={() => trackFormInteraction("Artist Name")}
                 />
                 <FormField
                   id="profileLink"
@@ -223,6 +235,7 @@ export default function ApplicationModal() {
                   label="Spotify Artist Profile Link"
                   placeholder="https://open.spotify.com/artist/..."
                   disabled={isSubmitting}
+                  onFocus={() => trackFormInteraction("Spotify Profile")}
                 />
                 <FormField
                   id="previousDistributor"
@@ -230,6 +243,7 @@ export default function ApplicationModal() {
                   label="Previous Distributor Used"
                   placeholder="e.g., DistroKid, TuneCore, CD Baby"
                   disabled={isSubmitting}
+                  onFocus={() => trackFormInteraction("Previous Distributor")}
                 />
               </>
             )}
@@ -250,7 +264,10 @@ export default function ApplicationModal() {
 
               <Select
                 value={platform}
-                onValueChange={setPlatform}
+                onValueChange={(value) => {
+                  setPlatform(value);
+                  trackFormInteraction("Social Media Platform");
+                }}
                 disabled={isSubmitting}
               >
                 <SelectTrigger className="w-full rounded-md border border-border bg-muted px-3 py-2 text-sm">
@@ -271,7 +288,7 @@ export default function ApplicationModal() {
                       >
                         {platform.charAt(0).toUpperCase() + platform.slice(1)}
                       </SelectItem>
-                    )
+                    ),
                   )}
                 </SelectContent>
               </Select>
@@ -292,6 +309,7 @@ export default function ApplicationModal() {
                 placeholder={`Your ${platform} profile link`}
                 required
                 disabled={isSubmitting}
+                onFocus={() => trackFormInteraction("Platform Handle")}
               />
             )}
 
