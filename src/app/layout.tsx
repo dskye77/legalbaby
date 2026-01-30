@@ -1,10 +1,12 @@
-// src/app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
+
 import Layout from "@/PageComponents/Layout/Layout";
+
 import { ThemeProvider } from "@/components/theme-provider";
-import { defaultMetadata } from "@/lib/metadata";
+import GoogleAds from "@/components/GoogleAds";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +18,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = defaultMetadata;
+export const metadata: Metadata = {
+  title: "LEGAL BABY - Independent Music Distribution",
+  description: "Artist-first music distribution platform. 70% royalties, no upfront costs, you own your masters.",
+};
 
 export default function RootLayout({
   children,
@@ -24,31 +29,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Favicons */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
-        
-        {/* Additional meta tags */}
-        <meta name="theme-color" content="#ff6600" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
+    <>
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          {/* Google Ads will be loaded here */}
+        </head>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <Layout>{children}</Layout>
-        </ThemeProvider>
-      </body>
-    </html>
+          {/* Google Ads Tracking */}
+          <GoogleAds />
+          
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Layout>{children}</Layout>
+          </ThemeProvider>
+        </body>
+      </html>
+    </>
   );
 }
