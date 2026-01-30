@@ -20,7 +20,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "LEGAL BABY - Independent Music Distribution",
-  description: "Artist-first music distribution platform. 70% royalties, no upfront costs, you own your masters.",
+  description:
+    "Artist-first music distribution platform. 70% royalties, no upfront costs, you own your masters.",
 };
 
 export default function RootLayout({
@@ -32,14 +33,19 @@ export default function RootLayout({
     <>
       <html lang="en" suppressHydrationWarning>
         <head>
-          {/* Google Ads will be loaded here */}
+          <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-icon.png"
+          />
         </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           {/* Google Ads Tracking */}
           <GoogleAds />
-          
+
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
